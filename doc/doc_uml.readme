@@ -1,0 +1,13 @@
+## How to generate the uml
+
+To generate a `.puml` file run the following command:
+```
+hpp2plantuml.exe -i "board/*.hpp" -i "player/*.hpp" -i "board/tiles/*.hpp" -i "board/tiles/buyableTiles/*.hpp" -i "board/tiles/unbuyableTiles/*.hpp" -o doc/generated.puml
+```
+
+Once the `.puml` has been generated you should add this line after the `@startuml` tag.
+```
+skinparam classAttributeIconSize 0
+```
+
+Once the `.puml` file is generated you can use it to get a `.png` representation of this architecture.
