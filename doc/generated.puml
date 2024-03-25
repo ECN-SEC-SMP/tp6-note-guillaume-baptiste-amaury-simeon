@@ -1,0 +1,166 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+
+
+/' Objects '/
+
+class Board {
+	+Board()
+	-_availableHotels : int
+	-_availableHouses : int
+	+getAvailableHotels() : int
+	+getAvailableHouses() : int
+	-_players : vector<Player>
+	+getPlayers() : vector<Player>
+	-_tiles : vector<Tile>
+	+getTiles() : vector<Tile>
+	-addOnePlayer(Player& player) : void
+	-addOneTile(Tile& tile) : void
+	+initBoard() : void
+	+playOneGlobalTurn() : void
+	+playOnePlayerTurn(Player& player) : void
+	+registerPlayers() : void
+	+setAvailableHotels(int availableHotels) : void
+	+setAvailableHouses(int availableHouses) : void
+	+setPlayers(vector<Player>) : void
+	+setTiles(vector<Tile>) : void
+}
+
+
+abstract class BuyableTile {
+	+BuyableTile(string name, int price, Player* player, int mortgagePrice)
+	+BuyableTile(string name, int price, int mortgagePrice)
+	-_player : Player*
+	+getPlayer() : Player*
+	-_mortgageStatus : bool
+	+isMortgaged() : bool
+	-_mortgagePrice : const int
+	-_price : int
+	+getPrice() : int
+	#runAuction(Player& excludedPlayer) : void
+	+{abstract} runTileAction(Player* player) : void
+	+setMortgageStatus(bool _mortgageStatus) : void
+	+setPlayer(Player* player) : void
+	+setPrice(int price) : void
+}
+
+
+class Land {
+	+Land(string Name, int price, Color color, int mortgagePrice)
+	+Land(string Name, int price, Color color, int mortgagePrice, Player* player)
+	-_color : Color
+	+getColor() : Color
+	-_hotel : bool
+	+hasHotel() : bool
+	-_houses : int
+	+getHouses() : int
+	+addOneHotel() : void
+	+addOneHouse() : void
+	+runTileAction(Player* player) : void
+	+setColor(Color color) : void
+	+setHotel(bool hotel) : void
+	+setHouses(int houses) : void
+}
+
+
+class Player {
+	-_broke : bool
+	-_inJail : bool
+	+isBroke() : bool
+	+isInJail() : bool
+	+removeMoney(int amount) : bool
+	-_diceDoubles : int
+	-_money : int
+	-_position : int
+	+getDiceDoubles() : int
+	+getMoney() : int
+	+getPosition() : int
+	+launchOneDice() : int
+	#launchOneDice() : int
+	-_name : string
+	+getName() : string
+	-_ownedTiles : vector<Tile>
+	+getOwnedTiles() : vector<Tile>
+	+addDiceDouble() : void
+	#addDiceDouble() : void
+	+addMoney(int amount) : void
+	+addOneOwnedTile(Tile& tile) : void
+	+resetDiceDoubles() : void
+	+setBrokeState(bool broke) : void
+	+setDiceDoubles(int diceDoubles) : void
+	+setJailState(bool inJail) : void
+	+setMoney(int money) : void
+	+setName(string name) : void
+	+setOwnedTiles(vector<Tile> ownedTiles) : void
+	+setPosition(int position) : void
+}
+
+
+class PublicService {
+	+PublicService(string Name, int price)
+	+PublicService(string Name, int price, Player* player)
+	+runTileAction(Player* player) : void
+}
+
+
+abstract class Tile {
+	+Tile(string name)
+	-_name : string
+	+getName() : string
+	+{abstract} runTileAction(Player* player) : void
+	+setName(string name) : void
+}
+
+
+class TrainStation {
+	+TrainStation(string Name, int price)
+	+TrainStation(string Name, int price, Player* player)
+	+runTileAction(Player* player) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.BuyableTile <|-- .Land
+
+
+.BuyableTile <|-- .PublicService
+
+
+.BuyableTile <|-- .TrainStation
+
+
+.Tile <|-- .BuyableTile
+
+
+
+
+
+/' Aggregation relationships '/
+
+.Board *-- .Player
+
+
+.Board *-- .Tile
+
+
+.BuyableTile o-- .Player
+
+
+.Player *-- .Tile
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
