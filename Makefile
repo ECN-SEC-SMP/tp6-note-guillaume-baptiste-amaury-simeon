@@ -1,10 +1,8 @@
 CXX = clang++
 
-override CXXFLAGS += -g -Wno-everything
+override CXXFLAGS += -g -Wno-everything -stdlib=libc++
 
-TARGET = main.exe
-
-
+TARGET = main.o
 
 SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
 
