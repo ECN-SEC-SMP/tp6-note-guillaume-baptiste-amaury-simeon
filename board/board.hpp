@@ -32,8 +32,8 @@ public:
     int getAvailableHotels(void);
 
     // Setters
-    void setPlayers(vector<Player>);
-    void setTiles(vector<Tile>);
+    void setPlayers(vector<Player> players);
+    void setTiles(vector<Tile> tiles);
     void setAvailableHouses(int availableHouses);
     void setAvailableHotels(int availableHotels);
 
