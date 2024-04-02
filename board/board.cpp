@@ -21,6 +21,7 @@ void Board::addOnePlayer(Player &player){
     setPlayers(newPlayers);
 }
 
+
 // Getters
 vector<Player> Board::getPlayers(void){
     return this->_players; 
@@ -37,6 +38,7 @@ int Board::getAvailableHouses(void){
 int Board::getAvailableHotels(void){
     return this->_availableHotels; 
 }
+
 
 // Setters
 void Board::setPlayers(vector<Player> players){
@@ -55,9 +57,10 @@ void Board::setAvailableHotels(int availableHotels){
     this->_availableHotels = availableHotels; 
 }
 
+
 // Methods
 void Board::initBoard(void){
-    // init tiles 
+    // init tiles =======================> TODO
     // init players 
     int nbPlayers; 
     cout << "How many players are you ? " << endl;
@@ -81,15 +84,41 @@ void Board::registerPlayers(void){
     string playerName; 
     cout << "What's the name of the player ?"<< endl; 
     cin >> playerName;  
-    
     Player newPlayer = Player(playerName); 
     addOnePlayer(newPlayer); 
 }
 
 void Board::playOneGlobalTurn(void){
-
+    vector<Player> playersList = getPlayers(); 
+    for (int player = 0; player < playersList.size(); player++){
+        Player actualPlayer = playersList[player]; 
+        playOnePlayerTurn(actualPlayer); 
+    } 
 }
 
 void Board::playOnePlayerTurn(Player &player){
+    if (player.isInJail() == 0){
+        cout << "It is now to " << player.getName() << " to play" << endl; 
+        int firstDice = player.launchOneDice(); 
+        int secondDice = player.launchOneDice(); 
+        if (firstDice == secondDice){
+            player.addDiceDouble();
+        }
+        else {
+            player.resetDiceDoubles(); 
+        }
 
+        if (player.getDiceDoubles() == 3){
+            player.setJailState(1); 
+        }
+        else {
+            int playerPosition = player.getPosition(); 
+            playerPosition = playerPosition + firstDice + secondDice; 
+            player.setPosition(playerPosition); 
+            vector<Tile> ListTiles = getTiles(); 
+            // Tile actualTile = ListTiles[playerPosition];
+            // actualTile.runTileAction(*player);
+        }
+    }   
 }
+
