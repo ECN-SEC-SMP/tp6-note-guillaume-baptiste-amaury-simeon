@@ -43,4 +43,7 @@ public:
 
     void playOneGlobalTurn(void);
     void playOnePlayerTurn(Player &player);
+
+    bool hasColorMonopoly(Color color) const;
+
 };
