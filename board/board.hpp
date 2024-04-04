@@ -45,5 +45,6 @@ public:
     void playOnePlayerTurn(Player &player);
 
     bool hasColorMonopoly(Color color) const;
+    bool CanConstructNewHouse(Color color, int newHouses) const;
 
 };
