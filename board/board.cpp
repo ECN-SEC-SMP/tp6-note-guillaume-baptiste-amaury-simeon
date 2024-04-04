@@ -122,10 +122,23 @@ void Board::playOnePlayerTurn(Player &player){
     }   
 }
 
-bool Board::hasMonopoly(Color color) const {
-    int count = std::count_if(_lands.begin(), _lands.end(), [color](const Land* land) {
+bool Board::hasColorMonopoly(Color color) const {
+    int count = count_if(_lands.begin(), _lands.end(), [color](const Land* land) {
         return land->getColor() == color && land->isOwned() && land->getOwner()->hasMonopoly(color);
     });
-    return count == LANDS_PER_GROUP; // LANDS_PER_GROUP représente le nombre de terrains dans un groupe de couleur
+    return count == LANDS_PER_GROUP; 
+}
+
+bool Board::CanConstructNewHouse(Color color, int newHouses) const {
+    int minHouses = MAX_HOUSES;
+    int maxHouses = 0;
+
+    for (const Land* land : _lands) {
+        if (land->getColor() == color) {
+            minHouses = min(minHouses, land->getHouses());
+            maxHouses = max(maxHouses, land->getHouses());
+        }
+    }
+    return (newHouses >= minHouses && newHouses <= maxHouses + 1);
 }
 
