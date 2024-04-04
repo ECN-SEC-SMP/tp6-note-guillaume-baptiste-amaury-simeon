@@ -142,3 +142,14 @@ bool Board::CanConstructNewHouse(Color color, int newHouses) const {
     return (newHouses >= minHouses && newHouses <= maxHouses + 1);
 }
 
+bool Board::CanConstructHotel(Color color) const {
+    int minHousesForHotel = 4;
+    
+    // Vérifier si chaque terrain de la même couleur a suffisamment de maisons pour construire un hôtel
+    for (const Land* land : _lands) {
+        if (land->getColor() == color && land->getHouses() < minHousesForHotel) {
+            return false;
+        }
+    }
+    return true;
+}
