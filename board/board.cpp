@@ -122,3 +122,10 @@ void Board::playOnePlayerTurn(Player &player){
     }   
 }
 
+bool Board::hasMonopoly(Color color) const {
+    int count = std::count_if(_lands.begin(), _lands.end(), [color](const Land* land) {
+        return land->getColor() == color && land->isOwned() && land->getOwner()->hasMonopoly(color);
+    });
+    return count == LANDS_PER_GROUP; // LANDS_PER_GROUP représente le nombre de terrains dans un groupe de couleur
+}
+
