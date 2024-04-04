@@ -46,5 +46,7 @@ public:
 
     bool hasColorMonopoly(Color color) const;
     bool CanConstructNewHouse(Color color, int newHouses) const;
+    bool CanConstructHotel(Color color) const;
+
 
 };
