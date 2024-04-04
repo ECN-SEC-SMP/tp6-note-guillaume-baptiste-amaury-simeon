@@ -6,6 +6,7 @@
 // Project headers
 #include "buyableTile.hpp"
 #include "../../../constants.h"
+#include "../../board.hpp"
 
 using namespace std;
 
