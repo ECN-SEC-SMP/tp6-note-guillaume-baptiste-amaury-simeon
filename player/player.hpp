@@ -5,6 +5,7 @@ using namespace std;
 // System headers
 #include <string>
 #include <vector>
+#include <memory>
 
 // Project headers
 #include "../board/tiles/tile.hpp"
@@ -18,7 +19,7 @@ private:
     int _position = 0;
     bool _broke = false;
 
-    vector<Tile> _ownedTiles = vector<Tile>();
+    vector<unique_ptr<Tile>> _ownedTiles = vector<unique_ptr<Tile>>();
 
     int _diceDoubles = 0;
     bool _inJail = false;
@@ -26,13 +27,17 @@ private:
 protected:
     int launchOneDice(void);
     void addDiceDouble(void);
+    void resetDiceDoubles(void);
 
 public:
+    // Constructors
+    Player::Player(string name, int money);
+
     // Getters
     string getName(void);
     int getPosition(void);
     int getMoney(void);
-    vector<Tile> getOwnedTiles(void);
+    vector<unique_ptr<Tile>> getOwnedTiles(void);
     int getDiceDoubles(void);
     bool isInJail(void);
     bool isBroke(void);
@@ -41,7 +46,7 @@ public:
     void setName(string name);
     void setPosition(int position);
     void setMoney(int money);
-    void setOwnedTiles(vector<Tile> ownedTiles);
+    void setOwnedTiles(vector<unique_ptr<Tile>> ownedTiles);
     void setDiceDoubles(int diceDoubles);
     void setJailState(bool inJail);
     void setBrokeState(bool broke);
@@ -50,9 +55,7 @@ public:
     void addMoney(int amount);
     bool removeMoney(int amount);
 
-    int launchOneDice(void);
-    void addDiceDouble(void);
-    void resetDiceDoubles(void);
+    int launchDices(void);
 
     void addOneOwnedTile(Tile &tile);
 };
