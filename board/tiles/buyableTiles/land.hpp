@@ -18,8 +18,8 @@ private:
 
 public:
     // Constructors
-    Land(string Name, int price, Color color, int mortgagePrice);
-    Land(string Name, int price, Color color, int mortgagePrice, Player *player);
+    Land(TileType type, string Name, int price, Color color, int mortgagePrice);
+    Land(TileType type, string Name, int price, Color color, int mortgagePrice, Player *player);
 
     // Getters
     Color getColor(void);

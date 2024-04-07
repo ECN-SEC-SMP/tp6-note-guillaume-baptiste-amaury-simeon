@@ -15,6 +15,26 @@ enum Color
     eYellow,
 };
 
+enum TileType
+{
+    eNoType = -1,
+
+    // NonBuyableTile: 1 < value < 10
+    eLand = 1,
+    ePublicservice,
+    eTrainStation,
+
+    // BuyableTile : value > 10
+    eCommunity = 11,
+    eFreeParking,
+    eGoToPrison,
+    eHazard,
+    eLuxuryTax,
+    ePrison,
+    eStart,
+    eTax,
+};
+
 // Player
 const int kDefaultMoneyAmount = 500;
 

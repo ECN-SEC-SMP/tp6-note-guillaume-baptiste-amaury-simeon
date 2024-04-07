@@ -5,7 +5,7 @@
 
 // Project headers
 #include "tiles/tile.hpp"
-#include "../../constans.h"
+#include "../constants.h"
 
 using namespace std;
 

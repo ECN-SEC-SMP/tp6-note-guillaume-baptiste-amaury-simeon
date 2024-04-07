@@ -2,6 +2,7 @@
 
 // Project headers
 #include "../tile.hpp"
+#include "../../../constants.h"
 
 class BuyableTile : public Tile
 {
@@ -17,8 +18,8 @@ protected:
 
 public:
     // Constructors
-    BuyableTile(string name, int price, Player *player, int mortgagePrice);
-    BuyableTile(string name, int price, int mortgagePrice);
+    BuyableTile(TileType type, string name, int price, Player *player, int mortgagePrice);
+    BuyableTile(TileType type, string name, int price, int mortgagePrice);
 
     // Getters
     int getPrice(void);

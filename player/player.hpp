@@ -31,7 +31,7 @@ protected:
 
 public:
     // Constructors
-    Player::Player(string name, int money);
+    Player(string name, int money);
 
     // Getters
     string getName(void);

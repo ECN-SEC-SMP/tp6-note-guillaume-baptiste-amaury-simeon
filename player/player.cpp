@@ -1,6 +1,4 @@
 // System headers
-#include <cstdlib>
-#include <algorithm>
 #include <stdexcept>
 #include <time.h>
 
@@ -110,8 +108,23 @@ void Player::resetDiceDoubles(void)
 
 void Player::addOneOwnedTile(Tile &tile)
 {
-    _ownedTiles.push_back(make_unique<TrainStation>(&tile));
-
-    // Supposed to check the tile type (must be buyable)
     // Supposed to check the tile is not owned twice...
+    switch (tile.getType())
+    {
+    case eLand:
+        _ownedTiles.push_back(make_unique<Land>(tile));
+        break;
+
+    case ePublicservice:
+        _ownedTiles.push_back(make_unique<PublicService>(tile));
+        break;
+
+    case eTrainStation:
+        _ownedTiles.push_back(make_unique<TrainStation>(tile));
+        break;
+
+    default:
+        throw logic_error("A player can only own a buyable tile");
+        break;
+    }
 }
